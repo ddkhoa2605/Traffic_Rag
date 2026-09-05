@@ -1,4 +1,4 @@
-# Traffic Law Parser v0.1
+# Traffic Law Parser
 
 Pipeline tạo canonical legal tree cho Luật 35/2024/QH15 và Luật 36/2024/QH15:
 
@@ -6,9 +6,6 @@ Pipeline tạo canonical legal tree cho Luật 35/2024/QH15 và Luật 36/2024/Q
 registry → PDF inspect/render → native extraction → normalization
 → legal state machine → validation → validated corpus
 ```
-
-Core parser không dùng LLM, vector database hoặc web. Vision là dependency tùy chọn,
-chỉ kiểm tra các trang bị validator flag và không được ghi đè canonical text.
 
 ## Cài đặt
 
