@@ -1,0 +1,35 @@
+services:
+  lightrag:
+    image: traffic-rag-lightrag:1.5.7-86e10c4
+    pull_policy: never
+    labels:
+      org.opencontainers.image.revision: 86e10c4aea9b65f4fcf1d769791d7a3ba4b560d7
+    restart: unless-stopped
+    env_file:
+      - path: .env.lightrag
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      PORT: 9621
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: ${LIGHTRAG_POSTGRES_DATABASE:-traffic_rag_lightrag}
+      POSTGRES_USER: ${LIGHTRAG_POSTGRES_USER:-traffic_rag_lightrag_app}
+      POSTGRES_PASSWORD: ${LIGHTRAG_POSTGRES_PASSWORD:?set LIGHTRAG_POSTGRES_PASSWORD in .env.lightrag}
+      WORKING_DIR: /app/data/rag_storage
+      INPUT_DIR: /app/data/inputs
+      EMBEDDING_BINDING_HOST: http://host.docker.internal:11434
+    ports:
+      - "127.0.0.1:9621:9621"
+    volumes:
+      - lightrag_working:/app/data/rag_storage
+      - ./data/12_graph:/app/data/traffic_graph:ro
+      - ./docker/lightrag/mirror.py:/app/traffic_rag_mirror.py:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  lightrag_working:

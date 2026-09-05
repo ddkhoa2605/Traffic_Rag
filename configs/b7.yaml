@@ -1,0 +1,35 @@
+version: "0.3.1"
+run_version: "v002"
+official_backend: postgres_dense
+metrics_schema_version: "0.3.0"
+evidence_max_tokens: 8192
+benchmark:
+  version_draft: eval-law35-36-v0.2-draft
+  version_frozen: eval-law35-36-v0.2.0
+  categories:
+    exact_reference: {dev: 16, test: 16}
+    multi_evidence: {dev: 16, test: 16}
+    semantic_paraphrase: {dev: 16, test: 16}
+    point_specific: {dev: 12, test: 12}
+    clause_intro_point: {dev: 12, test: 12}
+    hard_distractor: {dev: 8, test: 8}
+gates:
+  exact_reference_recall1_min_gain: 0.20
+  multi_evidence_coverage5_min_gain: 0.20
+  evidence_tokens_max_multiplier: 1.25
+  duplicate_token_ratio_max_increase: 0.05
+  latency_p95_max_increase_ms: 10.0
+  reranker_oracle_recall30_min: 0.90
+  reranker_min_ordering_failures: 10
+  reranker_latency_max_multiplier: 2.0
+  reranker_latency_absolute_max_ms: 2000.0
+selection_order:
+  - exact_reference_recall@1
+  - multi_evidence_coverage@5
+  - global_recall@5
+  - mrr
+  - global_evidence_coverage@5
+  - lower_evidence_tokens@5
+  - lower_duplicate_token_ratio@5
+  - lower_latency_p95
+  - policy_id

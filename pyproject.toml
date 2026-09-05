@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "traffic-law-rag"
+version = "0.1.0"
+description = "Canonical parser for Vietnamese traffic laws 35/2024/QH15 and 36/2024/QH15"
+requires-python = ">=3.12"
+dependencies = [
+  "PyMuPDF>=1.24,<2",
+  "pydantic>=2.7,<3",
+  "PyYAML>=6,<7",
+  "orjson>=3.10,<4",
+  "Pillow>=10,<13",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
+vision = ["transformers>=4.45", "torch>=2.4", "qwen-vl-utils"]
+eval = ["sentence-transformers>=3,<6", "numpy>=1.26,<3"]
+postgres = ["psycopg[binary]>=3.2,<4", "pgvector>=0.4,<1"]
+graph = [
+  "openai>=2,<4",
+  "google-genai>=1,<3",
+  "httpx>=0.28,<1",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+]
+demo = [
+  "sentence-transformers>=3,<6",
+  "numpy>=1.26,<3",
+  "psycopg[binary]>=3.2,<4",
+  "pgvector>=0.4,<1",
+  "google-genai>=1,<3",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+  "postgres: requires a real PostgreSQL 18 + pgvector shadow database",
+  "graph_postgres: requires the traffic_rag_lightrag PostgreSQL database",
+  "graph_external: requires Docker, Ollama, LightRAG, or a hosted LLM",
+]
+
+[tool.setuptools.packages.find]
+include = ["src*"]

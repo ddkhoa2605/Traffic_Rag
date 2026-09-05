@@ -1,0 +1,37 @@
+version: "1.0.0"
+release_id: kg-v001
+workspace: kg_v001_building
+lightrag:
+  version: "1.5.7"
+  commit: 86e10c4aea9b65f4fcf1d769791d7a3ba4b560d7
+  image: traffic-rag-lightrag:1.5.7-86e10c4
+embedding:
+  binding: ollama
+  model: bge-m3
+  dimensions: 1024
+  max_tokens: 8192
+  vector_index_type: HNSW
+pilot:
+  article_count: 20
+  retry_schema_once: true
+  max_async_llm: 2
+  providers:
+    openai:
+      model: gpt-5.6-luna
+      reasoning_effort: low
+      input_price_per_million: 0.20
+      output_price_per_million: 1.20
+      pricing_checked_at: "2026-08-23"
+    gemini:
+      model: gemini-3.1-flash-lite
+      input_price_per_million: 0.25
+      output_price_per_million: 1.50
+      pricing_checked_at: "2026-08-23"
+selection:
+  canonical_mapping_accuracy: 1.0
+  source_attribution_accuracy: 1.0
+  entity_precision_min: 0.95
+  relationship_precision_min: 0.95
+  relationship_direction_accuracy_min: 0.95
+  missing_important_relation_rate_max: 0.10
+  meaningful_relationship_precision_delta: 0.02

@@ -1,0 +1,21 @@
+schema_version: "0.1.0"
+deployment_mode: local_shadow
+compose_file: docker-compose.pgvector.yml
+image: pgvector/pgvector:0.8.6-pg18-trixie
+host: 127.0.0.1
+port: 55432
+schema: traffic_rag
+vector:
+  dimensions: 1024
+  normalized: true
+  similarity: cosine
+  index: none
+  norm_tolerance: 0.00001
+shadow:
+  split: dev
+  query_count: 80
+  score_tolerance: 0.000001
+  expected_passages:
+    B1: 175
+    B4e: 1460
+  activate_after_compare: false

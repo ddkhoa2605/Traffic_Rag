@@ -1,0 +1,48 @@
+corpus_version: corpus-law35-36-v0.1
+documents:
+  - LAW_35_2024
+  - LAW_36_2024
+tokenizer:
+  model: BAAI/bge-m3
+  revision: 5617a9f61b028005a4858fdac845db406aefb181
+  max_tokens: 8192
+strategies:
+  B0:
+    type: fixed_window
+    window_tokens: 400
+    overlap_tokens: 80
+  B1:
+    type: article
+  B2:
+    type: clause
+    fallback_article_without_clause: true
+  B3:
+    type: point
+    fallback_to_clause: true
+    fallback_article_without_clause: true
+  B4:
+    type: point_clause_context
+    include_article_heading: true
+    include_clause_intro: true
+  B5:
+    type: child_parent
+    index_unit: point
+    include_article_heading_in_index: true
+    expansion:
+      include_article_heading: true
+      include_clause_intro: true
+  B4a:
+    type: context_variant
+    context: [point]
+  B4b:
+    type: context_variant
+    context: [article_heading, point]
+  B4c:
+    type: context_variant
+    context: [clause_intro, point]
+  B4d:
+    type: context_variant
+    context: [article_heading, clause_intro, point]
+  B4e:
+    type: context_variant
+    context: [document_title, article_heading, clause_intro, point]

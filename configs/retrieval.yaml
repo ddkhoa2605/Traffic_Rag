@@ -1,0 +1,31 @@
+version: "0.2.0"
+top_k: [1, 3, 5, 10]
+bm25:
+  k1: 1.5
+  b: 0.75
+  tokenizer: unicode_alphanumeric_nfc_casefold
+  remove_stopwords: false
+dense:
+  model: BAAI/bge-m3
+  revision: 5617a9f61b028005a4858fdac845db406aefb181
+  max_length: 8192
+  normalize_embeddings: true
+  similarity: cosine
+  preferred_device: cuda
+  preferred_dtype: float16
+  passage_batch_size: 1
+  cpu_passage_batch_size: 4
+  query_batch_size: 8
+hybrid_b6:
+  article_strategy: B1
+  fine_strategy: B4e
+  article_top_n: 10
+  fine_global_top_n: 50
+  guided_leaves_per_article: 3
+  rrf_k: 60
+  article_weight: 1.0
+  fine_weight: 1.0
+  max_article_results_at_5: 1
+  max_article_results_at_10: 2
+  max_fine_results_per_article: 3
+  article_evidence_policy: granular_scout_bundle

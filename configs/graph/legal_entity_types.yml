@@ -1,0 +1,12 @@
+version: legal-entity-v1
+entity_types:
+  - Actor
+  - Vehicle
+  - Infrastructure
+  - Action
+  - Violation
+  - Sanction
+  - TimeConstraint
+  - LegalConcept
+  - Condition
+  - Exception

@@ -1,0 +1,19 @@
+version: "0.2.0"
+retrieval_backend: postgres
+strategy: B6
+routing_policy: B7c
+dataset_selector: active
+runtime_dsn_env: TRAFFIC_RAG_RUNTIME_DSN
+require_strategy_lock_match: true
+require_b7_policy_lock_match: true
+reference_routing:
+  enabled: true
+multi_evidence:
+  enabled: true
+query_encoder:
+  model: BAAI/bge-m3
+  revision: 5617a9f61b028005a4858fdac845db406aefb181
+  max_length: 8192
+  preferred_device: cpu
+default_top_k: 5
+max_top_k: 10

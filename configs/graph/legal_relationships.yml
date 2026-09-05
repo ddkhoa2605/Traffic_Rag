@@ -1,0 +1,21 @@
+version: legal-rel-v1
+structural:
+  - CONTAINS
+  - NEXT
+  - ISSUED_BY
+  - REFERENCES
+semantic:
+  - DEFINES
+  - APPLIES_TO
+  - REGULATES
+  - REQUIRES
+  - PROHIBITS
+  - HAS_DEADLINE
+  - CONDITION_FOR
+  - EXCEPTION_TO
+future:
+  - SANCTIONED_BY
+  - HAS_PENALTY
+  - AMENDS
+  - REPEALS
+  - SUPERSEDES

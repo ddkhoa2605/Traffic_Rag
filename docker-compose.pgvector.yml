@@ -1,0 +1,23 @@
+name: traffic-rag-pgvector
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg18-trixie
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-traffic_rag}
+      POSTGRES_USER: ${POSTGRES_ADMIN_USER:-traffic_rag_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?set POSTGRES_ADMIN_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - traffic_rag_pgdata:/var/lib/postgresql/18/docker
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  traffic_rag_pgdata:
