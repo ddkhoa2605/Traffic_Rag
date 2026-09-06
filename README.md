@@ -4,7 +4,7 @@
 
 Hiện tại project tập trung xử lý trước **Luật 35/2024/QH15** và **Luật 36/2024/QH15** để làm bộ corpus chuẩn, sau đó mới mở rộng thêm các văn bản khác.
 
-Mục tiêu chính là xây dựng một pipeline từ PDF → canonical legal tree → retrieval/evaluation, trong đó **cấu trúc pháp lý gốc được giữ làm nguồn sự thật (source of truth)**.
+Mục tiêu chính là xây dựng một pipeline từ PDF → canonical legal tree → retrieval/evaluation, trong đó **cấu trúc pháp lý gốc được giữ làm source of truth**.
 
 Pipeline tổng quát:
 
@@ -205,3 +205,5 @@ Recall@5
 ```
 
 Quá trình finalize sẽ fail nếu review chưa đủ 20/20 approved hoặc có verdict `benchmark_issue`.
+
+## LightRAG
